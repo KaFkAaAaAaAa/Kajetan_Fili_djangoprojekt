@@ -1,15 +1,18 @@
+{% load static %}
 <!-- notes/note_list.html -->
 <!DOCTYPE html>
-<html lang="pl">
+<html>
 <head>
     <title>Lista notatek</title>
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
 </head>
 <body>
-    <h1>Lista notatek</h1>
-    <ul>
+    <div class="notatkiLISTA">
         {% for note in notes %}
-            <li><a href="{% url 'base:note_detail' note.pk %}">{{ note.title }}</a></li>
+            <div class="dupa">
+                <a class="pojedyncza-notatka" href="{% url 'base:note_detail' note.pk %}">{{ note.title }}</a>
+            </div>
         {% endfor %}
-    </ul>
+    </div>
 </body>
 </html>

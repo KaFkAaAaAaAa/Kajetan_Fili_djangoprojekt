@@ -1,0 +1,15 @@
+/* styles.css */
+
+/* Styl dla tytułu notatki w widoku szczegółów */
+.note-detail-title {
+    font-size: 24px;
+    color: #333;
+    text-align: center;
+}
+
+/* Styl dla treści notatki w widoku szczegółów */
+.note-detail-content {
+    font-size: 16px;
+    line-height: 1.5;
+    color: #666;
+}
