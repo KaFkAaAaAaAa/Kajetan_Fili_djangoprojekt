@@ -1,10 +1,13 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
+{% extends "notebook/base.html" %}
 
-</body>
-</html>
+{% block title %}
+	Notatki
+{% endblock %}
+{% block content %}
+	<h1>Twoje notatki</h1>
+    {% for notatka in Note %}
+        <h2><a href="{{ Note.get_absolute_url }}">{{ Note.title }}</a></h2>
+            <p class="date">Opublikowana {{ Note.publish }} przez {{ Note.author }}</p>
+            {{ Note.body|truncatewords:15|linebreaks }}
+    {% endfor %}
+{% endblock %}

@@ -1,10 +1,15 @@
+{% load static %}
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pl">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+{#    css<link href="{% static "css/blog.css" %}" rel="stylesheet"> i import wyzej zamiast static#}
+    <title>{% block title %}{% endblock %}</title>
 </head>
 <body>
-
+    <div id="content">
+        {% block content %}
+        {% endblock %}
+    </div>
 </body>
 </html>

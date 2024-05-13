@@ -4,7 +4,7 @@ from .models import Note
 
 def notes_list(request):
     notes = Note.published.all()
-    return render(request, 'base/note/list.html', {'notes': notes})
+    return render(request, 'base/templates/notebook/note/list.html', {'notes': notes})
 
 
 def note_detail(request, year, month, day, note):
@@ -13,4 +13,4 @@ def note_detail(request, year, month, day, note):
                              publish__year=year,
                              publish__month=month,
                              publish__day=day)
-    return render('base/note/detail.html', {'note': note})
+    return render(request, 'base/templates/notebook/note/detail.html', {'note': note})
