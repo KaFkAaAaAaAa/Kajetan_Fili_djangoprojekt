@@ -4,6 +4,6 @@ from . import views
 app_name = 'base'
 
 urlpatterns = [
-    path('', views.notes_list, name='notes_list'),
-    path('<int:year>/<int:month>/<int:day>/<slug:note>/', views.note_detail, name='note_detail'),
+    path('', views.note_list, name='note_list'),
+    path('<int:pk>/', views.note_detail, name='note_detail'),
 ]

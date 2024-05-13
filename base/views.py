@@ -1,16 +1,10 @@
-from django.shortcuts import render, get_object_or_404
+from django.shortcuts import render
 from .models import Note
 
+def note_list(request):
+    notes = Note.objects.all()
+    return render(request, 'notes/note_list.html', {'notes': notes})
 
-def notes_list(request):
-    notes = Note.published.all()
-    return render(request, 'base/templates/notebook/note/list.html', {'notes': notes})
-
-
-def note_detail(request, year, month, day, note):
-    note = get_object_or_404(Note, slug=note,
-                             status='published',
-                             publish__year=year,
-                             publish__month=month,
-                             publish__day=day)
-    return render(request, 'base/templates/notebook/note/detail.html', {'note': note})
+def note_detail(request, pk):
+    note = Note.objects.get(pk=pk)
+    return render(request, 'notes/note_detail.html', {'note': note})

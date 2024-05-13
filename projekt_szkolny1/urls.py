@@ -5,6 +5,5 @@ from django.views.generic import detail
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('base/', include('base.urls', namespace='base')),
-    path('detail/', include('detail.urls', namespace='detail'))
 
 ]

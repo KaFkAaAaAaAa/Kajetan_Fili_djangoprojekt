@@ -1,0 +1,15 @@
+<!-- notes/note_list.html -->
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <title>Lista notatek</title>
+</head>
+<body>
+    <h1>Lista notatek</h1>
+    <ul>
+        {% for note in notes %}
+            <li><a href="{% url 'base:note_detail' note.pk %}">{{ note.title }}</a></li>
+        {% endfor %}
+    </ul>
+</body>
+</html>
