@@ -26,6 +26,6 @@ a{
     width: 15vw;
 }
 .notatkiLISTA{
-        display: flex;
+        display: block;
         max-width: 100%;
 }

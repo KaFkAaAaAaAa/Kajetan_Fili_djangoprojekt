@@ -34,7 +34,7 @@ class Note(models.Model):
         return self.title
 
     class Meta:
-        ordering = ('-publish', '-priority')
+        ordering = ('priority', '-publish')
 
     def get_absolute_url(self):
         return reverse('base:note_detail',
