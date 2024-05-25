@@ -1,36 +1,125 @@
 {% load static %}
-<!-- notes/note_list.html -->
 <!DOCTYPE html>
 <html>
 <head>
     <title>Lista notatek</title>
     <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <!-- Dodaj Bootstrap CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+    <!-- Dodaj czcionkę Roboto -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap">
+    <style>
+        body {
+            background-color: #222; /* Ciemne tło */
+            color: #f8f8f8; /* Jasny tekst */
+            font-family: 'Roboto', sans-serif; /* Czcionka Roboto */
+            padding: 0;
+            margin: 0;
+            text-transform: uppercase;
+        }
+        .note-card {
+            background-color: #333; /* Ciemniejsze tło dla kart */
+            color: #f8f8f8; /* Jasny tekst */
+            padding: 20px;
+            border-radius: 8px;
+            text-align: left;
+            margin: 10px;
+            transition: transform 0.2s ease; /* Animacja transformacji */
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Cień dla notatek */
+        }
+        .note-card:hover {
+            transform: scale(1.05); /* Powiększenie po najechaniu myszką */
+        }
+        .note-title {
+            font-size: 24px;
+            color: #f8f8f8;
+            text-decoration: none;
+        }
+        .note-title:hover {
+            color: #ccc;
+        }
+        .note-meta {
+            font-size: 14px;
+            color: #aaa;
+        }
+        .note-body {
+            margin-top: 10px;
+        }
+        .pagination {
+            margin-top: 20px;
+            margin-bottom: 20px; /* Dodatkowy odstęp na dole */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        .pagination a {
+            color: #f8f8f8;
+            text-decoration: none;
+            padding: 5px 10px;
+            margin: 0 5px;
+            border-radius: 5px;
+            background: linear-gradient(to bottom, #555 0%, #333 100%); /* Gradientowe tło */
+            border: 1px solid #555;
+            transition: background-color 0.3s ease; /* Animacja zmiany koloru tła */
+        }
+        .pagination a:hover {
+            background: linear-gradient(to bottom, #777 0%, #555 100%); /* Zmiana gradientu po najechaniu myszką */
+        }
+        .pagination .current {
+            color: #fff;
+            background-color: #007bff;
+            border-color: #007bff;
+        }
+    </style>
 </head>
 <body>
-    <div class="notatkiLISTA">
-        {% for note in page_obj %}
-            <div class="dupa">
-                <a class="pojedyncza-notatka" href="{% url 'base:note_detail' note.pk %}">{{ note.title }}</a>
-            </div>
-        {% endfor %}
+    <div class="container-fluid mt-5">
+        <div class="row">
+            {% for note in page_obj %}
+                <div class="col-md-4 mb-3">
+                    <div class="note-card">
+                        <a class="note-title" href="{% url 'base:note_detail' note.pk %}">{{ note.title }}</a>
+                        <div class="note-meta">
+                            Autor: {{ note.author.username }}<br>
+                            Data utworzenia: {{ note.created|date:"d M Y H:i" }}
+                        </div>
+                        <div class="note-body">
+                            {{ note.body|truncatewords:5 }}
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+        <div class="pagination">
+            <ul class="pagination">
+                {% if page_obj.has_previous %}
+                    <li class="page-item">
+                        <a class="page-link" href="?page=1">&laquo; pierwsza</a>
+                    </li>
+                    <li class="page-item">
+                        <a class="page-link" href="?page={{ page_obj.previous_page_number }}">poprzednia</a>
+                    </li>
+                {% endif %}
+
+                <li class="page-item">
+                    <span class="page-link current">
+                        Strona {{ page_obj.number }} z {{ page_obj.paginator.num_pages }}.
+                    </span>
+                </li>
+
+                {% if page_obj.has_next %}
+                    <li class="page-item">
+                        <a class="page-link" href="?page={{ page_obj.next_page_number }}">następna</a>
+                    </li>
+                    <li class="page-item">
+                        <a class="page-link" href="?page={{ page_obj.paginator.num_pages }}">ostatnia &raquo;</a>
+                    </li>
+                {% endif %}
+            </ul>
+        </div>
     </div>
 
-    <div class="pagination">
-        <span class="step-links">
-            {% if page_obj.has_previous %}
-                <a href="?page=1">&laquo; pierwsza</a>
-                <a href="?page={{ page_obj.previous_page_number }}">poprzednia</a>
-            {% endif %}
-
-            <span class="current">
-                Strona {{ page_obj.number }} z {{ page_obj.paginator.num_pages }}.
-            </span>
-
-            {% if page_obj.has_next %}
-                <a href="?page={{ page_obj.next_page_number }}">następna</a>
-                <a href="?page={{ page_obj.paginator.num_pages }}">ostatnia &raquo;</a>
-            {% endif %}
-        </span>
-    </div>
+    <!-- Dodaj Bootstrap JavaScript (opcjonalnie) -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
