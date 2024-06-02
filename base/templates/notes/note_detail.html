@@ -73,6 +73,23 @@
         .back-button:hover {
             background-color: #0056b3;
         }
+        .back-button-container {
+    margin-top: 20px;
+}
+
+.edit-button {
+    padding: 10px 20px;
+    font-size: 16px;
+    border-radius: 5px;
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    cursor: pointer;
+}
+
+.edit-button:hover {
+    background-color: #0056b3;
+}
     </style>
 </head>
 <body>
@@ -87,6 +104,9 @@
     <div class="back-button-container">
         <a href="{% url 'base:note_list' %}" class="back-button" id="back-button">Powrót do listy</a>
     </div>
+<div class="back-button-container">
+    <button class="btn edit-button" id="editButton">Edycja notatki</button>
+</div>
     <div class="footer">
         Autor: {{ note.author.username }}<br>
         Data utworzenia: {{ note.created|date:"d M Y H:i" }}
@@ -108,5 +128,12 @@
             });
         });
     </script>
+<script>
+document.getElementById("editButton").onclick = function() {
+    var currentUrl = window.location.href;
+    var newUrl = currentUrl + "edit";
+    window.location.href = newUrl;
+};
+</script>
 </body>
 </html>

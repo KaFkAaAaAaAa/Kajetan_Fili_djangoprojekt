@@ -1,7 +1,6 @@
 {% extends "notebook/base.html" %}
 {% block content %}
     <style>
-/* Stylizacja body */
 body {
     background-color: #333; /* ciemne tło */
     color: white; /* jasny tekst */
@@ -9,10 +8,8 @@ body {
     align-items: center;
     justify-content: center;
     height: 100vh;
-    margin: 0; /* usuwamy domyślne marginesy */
 }
 
-/* Stylizacja formularza notatki */
 .note {
     background-color: rgba(255, 255, 255, 0.1); /* transparentne tło dla formularza */
     padding: 20px;
@@ -21,16 +18,13 @@ body {
     max-width: 500px;
 }
 
-/* Stylizacja elementów wewnątrz formularza */
 .note-form {
     margin-top: 20px;
 }
 
-/* Stylizacja przycisku w formularzu */
 .note-form button {
     margin-top: 10px;
 }
-
         .back-button-container {
             text-align: center;
             margin: 20px 0;
@@ -52,20 +46,20 @@ body {
         .back-button-container {
     margin-top: 20px;
 }
-
     </style>
 <div class="main-container">
     <div class="note-main">
         <div class="container">
             <div class="note">
-                <h1>Tworzenie notatki</h1>
-                <form method="post">
+                <h1>Edycja notatki</h1>
+
+                <form method="post" class="note-form">
                     {% csrf_token %}
                     {{ form.as_p }}
                     <br>
-                    <button class="btn btn-primary" type="submit">Stwórz notatkę</button>
+                    <button type="submit" class="btn btn-primary">Edytuj notatkę</button>
                 </form>
-                 <div class="back-button-container">
+                    <div class="back-button-container">
         <a href="{% url 'base:note_list' %}" class="back-button" id="back-button">Powrót do listy</a>
     </div>
             </div>

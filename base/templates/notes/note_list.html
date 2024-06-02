@@ -84,7 +84,7 @@
                             Data utworzenia: {{ note.created|date:"d M Y H:i" }}
                         </div>
                         <div class="note-body">
-                            {{ note.body|truncatewords:5 }}
+                            {{ note.body|truncatechars:25 }}
                         </div>
                     </div>
                 </div>

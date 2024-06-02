@@ -4,6 +4,9 @@ from .models import Note
 from .forms import NoteForm
 from django.contrib.auth.models import User
 from django.utils.text import slugify
+from django.shortcuts import render, get_object_or_404, redirect
+from .models import Note
+from .forms import NoteForm
 
 
 def note_list(request):
@@ -35,15 +38,16 @@ def create_note(request):
     return render(request, 'notes/note_form.html', {'form': form})
 
 
-def edit_note(request, pk):
-    note = get_object_or_404(Note, pk=pk)
+def edit_note(request,id):
+    note = get_object_or_404(Note, pk=id)
     if request.method == 'POST':
         form = NoteForm(request.POST, instance=note)
+
         if form.is_valid():
             form.save()
-            return redirect('note_list')
+            return redirect(f'/base/{id}')
+
     else:
         form = NoteForm(instance=note)
-    return render(request, 'notes/note_form.html', {'form': form})
 
-
+    return render(request, 'notes/edit.html', {'form': form, 'note': note})
